@@ -10,28 +10,27 @@ const emoDic = {
 };
 const arrOfEmo = Object.keys(emoDic);
 
-// function showAllArrElements(prop) {
-//   for (let i = 0; i < n; i++) {
-//     return <h2>{prop[i]}</h2>;
-//   }
-// }
 export default function App() {
   var [emostate, setEmostate] = useState("");
+  var [error, setError] = useState("");
   return (
     <div className="App">
       <h1>Emoji Dictionary</h1>
       <input
         onChange={(e) => {
-          arrOfEmo.map((x) => {
-            if (e.target.value != x) {
-              setEmostate("Emoji Not Found");
-            } else {
-              setEmostate(e.target.value);
+          if (e.target.value == "") {
+            return setError(""), setEmostate("");
+          }
+          for (let i = 0; i < arrOfEmo.length; i++) {
+            if (e.target.value == arrOfEmo[i]) {
+              return setEmostate(e.target.value), setError("");
             }
-          });
+          }
+          return setError("error in finding emoji");
         }}
       />
       <h3>{emoDic[emostate]}</h3>
+      <h3>{error}</h3>
       {arrOfEmo.map((x) => x)}
     </div>
   );
