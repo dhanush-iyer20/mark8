@@ -18,15 +18,17 @@ export default function App() {
       <h1>Emoji Dictionary</h1>
       <input
         onChange={(e) => {
+          //case of empty input box
           if (e.target.value == "") {
             return setError(""), setEmostate("");
           }
+          //for loop to check whether the input lies in the keys array
           for (let i = 0; i < arrOfEmo.length; i++) {
             if (e.target.value == arrOfEmo[i]) {
               return setEmostate(e.target.value), setError("");
             }
           }
-          return setError("error in finding emoji");
+          return setError("error in finding emoji"), setEmostate("");
         }}
       />
       <h3>{emoDic[emostate]}</h3>
